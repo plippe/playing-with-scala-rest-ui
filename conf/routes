@@ -8,3 +8,12 @@ GET     /                           controllers.HomeController.index
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+GET    /articles          controllers.ArticlesController.listArticles
+GET    /articles/new      controllers.ArticlesController.newArticle
+POST   /articles          controllers.ArticlesController.createArticle
+GET    /articles/:id      controllers.ArticlesController.showArticle(id: java.util.UUID)
+GET    /articles/:id/edit controllers.ArticlesController.editArticle(id: java.util.UUID)
+PATCH  /articles/:id      controllers.ArticlesController.updateArticle(id: java.util.UUID)
+PUT    /articles/:id      controllers.ArticlesController.updateArticle(id: java.util.UUID)
+DELETE /articles/:id      controllers.ArticlesController.deleteArticle(id: java.util.UUID)

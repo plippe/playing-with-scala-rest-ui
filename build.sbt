@@ -15,3 +15,5 @@ libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0
 
 // Adds additional packages into conf/routes
 // play.sbt.routes.RoutesKeys.routesImport += "com.github.plippe.binders._"
+
+libraryDependencies += "com.github.plippe" %% "play-form" % "2.8.1"

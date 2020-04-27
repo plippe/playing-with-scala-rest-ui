@@ -1,0 +1,14 @@
+@(form: Form[ArticleForm])(implicit request: MessagesRequestHeader)
+
+<h1>New Article</h1>
+
+@com.github.plippe.play.form.form(routes.ArticlesController.createArticle) {
+  @helper.CSRF.formField
+
+  @helper.inputText(form(models.ArticleForm.TitleField))
+  @helper.textarea(form(models.ArticleForm.TextField))
+
+  <input type="submit" />
+}
+
+<a href="@routes.ArticlesController.listArticles">Back</a>

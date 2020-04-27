@@ -1,0 +1,15 @@
+@(article: Article)(implicit request: RequestHeader)
+
+<h1>Article</h1>
+
+<p><strong>Id:</strong> @article.id</p>
+<p><strong>Title:</strong> @article.title</p>
+<p><strong>Text:</strong> @article.text</p>
+<p><strong>Created At:</strong> @article.createdAt</p>
+<p><strong>Updated At:</strong> @article.updatedAt</p>
+
+<a href="@routes.ArticlesController.editArticle(article.id)">Edit</a>
+@com.github.plippe.play.form.form(helper.CSRF(routes.ArticlesController.deleteArticle(article.id))) {
+  <input type="submit" value="Destroy"/>
+}
+<a href="@routes.ArticlesController.listArticles">Back</a>
