@@ -21,16 +21,10 @@ object Article {
       LocalDateTime.now(),
     )
 
-  def fromForm(model: Article, form: ArticleForm): Article =
-    model.copy(
+  def updated(self: Article)(form: ArticleForm): Article =
+    self.copy(
       title = form.title,
       text = form.text,
       updatedAt = LocalDateTime.now(),
-    )
-
-  def toForm(model: Article): ArticleForm =
-    ArticleForm(
-      model.title,
-      model.text,
     )
 }

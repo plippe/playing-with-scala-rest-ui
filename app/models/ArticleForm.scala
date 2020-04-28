@@ -10,6 +10,12 @@ case class ArticleForm(
 )
 
 object ArticleForm {
+  def fromModel(model: Article): ArticleForm =
+    ArticleForm(
+      model.title,
+      model.text,
+    )
+
   val TitleField = "title"
   val TextField = "text"
 

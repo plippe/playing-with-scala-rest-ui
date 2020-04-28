@@ -41,8 +41,9 @@ class ArticlesController @Inject()(
   def editArticle(id: String) = Action { implicit request =>
     store.get(id)
       .fold(Redirect(routes.ArticlesController.listArticles)) { article =>
-        val form = models.ArticleForm.playForm.fill(models.Article.toForm(article))
-        Ok(views.html.articles.editArticle(article.id, form))
+        val form = models.ArticleForm.fromModel(article)
+        val playform = models.ArticleForm.playForm.fill(form)
+        Ok(views.html.articles.editArticle(article.id, playform))
       }
   }
 
@@ -54,7 +55,7 @@ class ArticlesController @Inject()(
           .fold({ formWithErrors =>
             BadRequest(views.html.articles.editArticle(id, formWithErrors))
           }, { form =>
-            val model = models.Article.fromForm(article, form)
+            val model = models.Article.updated(article)(form)
             store.update(model.id, model)
             Redirect(routes.ArticlesController.showArticle(model.id))
           })
