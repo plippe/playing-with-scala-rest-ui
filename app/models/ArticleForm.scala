@@ -1,7 +1,8 @@
 package models
 
 import play.api.data.Form
-import play.api.data.Forms.{mapping, nonEmptyText}
+import play.api.data.Forms.{mapping, text}
+import play.api.data.validation.Constraints._
 
 case class ArticleForm(
   title: String,
@@ -13,7 +14,7 @@ object ArticleForm {
   val TextField = "text"
 
   val playForm: Form[ArticleForm] = Form(mapping(
-    TitleField -> nonEmptyText,
-    TextField -> nonEmptyText,
+    TitleField -> text.verifying(minLength(5)),
+    TextField -> text,
   )(ArticleForm.apply)(ArticleForm.unapply))
 }
