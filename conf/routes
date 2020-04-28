@@ -12,8 +12,8 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET    /articles          controllers.ArticlesController.listArticles
 GET    /articles/new      controllers.ArticlesController.newArticle
 POST   /articles          controllers.ArticlesController.createArticle
-GET    /articles/:id      controllers.ArticlesController.showArticle(id: java.util.UUID)
-GET    /articles/:id/edit controllers.ArticlesController.editArticle(id: java.util.UUID)
-PATCH  /articles/:id      controllers.ArticlesController.updateArticle(id: java.util.UUID)
-PUT    /articles/:id      controllers.ArticlesController.updateArticle(id: java.util.UUID)
-DELETE /articles/:id      controllers.ArticlesController.deleteArticle(id: java.util.UUID)
+GET    /articles/:id      controllers.ArticlesController.showArticle(id: String)
+GET    /articles/:id/edit controllers.ArticlesController.editArticle(id: String)
+PATCH  /articles/:id      controllers.ArticlesController.updateArticle(id: String)
+PUT    /articles/:id      controllers.ArticlesController.updateArticle(id: String)
+DELETE /articles/:id      controllers.ArticlesController.deleteArticle(id: String)
