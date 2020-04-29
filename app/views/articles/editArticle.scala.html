@@ -11,5 +11,10 @@
   <input type="submit" />
 }
 
+@com.github.plippe.play.form.form(routes.ArticlesController.deleteArticle(article.id)) {
+  @helper.CSRF.formField
+  <input type="submit" value="Destroy"/>
+}
+
 <a href="@routes.ArticlesController.showArticle(article.id)">Show</a>
 <a href="@routes.ArticlesController.listArticles">Back</a>

@@ -1,4 +1,4 @@
-@(article: Article)(implicit request: RequestHeader)
+@(article: Article)
 
 <h1>Article</h1>
 
@@ -9,7 +9,4 @@
 <p><strong>Updated At:</strong> @article.updatedAt</p>
 
 <a href="@routes.ArticlesController.editArticle(article.id)">Edit</a>
-@com.github.plippe.play.form.form(helper.CSRF(routes.ArticlesController.deleteArticle(article.id))) {
-  <input type="submit" value="Destroy"/>
-}
 <a href="@routes.ArticlesController.listArticles">Back</a>

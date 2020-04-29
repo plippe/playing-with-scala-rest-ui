@@ -1,4 +1,4 @@
-@(articles: Iterable[Article])(implicit request: RequestHeader)
+@(articles: Iterable[Article])
 
 <h1>Articles</h1>
 
@@ -25,11 +25,6 @@
 
         <td><a href="@routes.ArticlesController.showArticle(article.id)">Show</a></td>
         <td><a href="@routes.ArticlesController.editArticle(article.id)">Edit</a></td>
-        <td>
-          @com.github.plippe.play.form.form(helper.CSRF(routes.ArticlesController.deleteArticle(article.id))) {
-            <input type="submit" value="Destroy"/>
-          }
-        </td>
       </tr>
     }
   </tbody>

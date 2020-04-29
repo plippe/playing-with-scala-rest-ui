@@ -37,11 +37,11 @@ class ArticlesController @Inject()(
       })
   }
 
-  def listArticles = Action { implicit request =>
+  def listArticles = Action {
     Ok(views.html.articles.listArticles(store.values))
   }
 
-  def showArticle(id: UUID) = Action { implicit request =>
+  def showArticle(id: UUID) = Action {
     store.get(id)
       .fold(Redirect(routes.ArticlesController.listArticles)) { article =>
         Ok(views.html.articles.showArticle(article))
