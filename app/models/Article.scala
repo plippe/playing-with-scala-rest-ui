@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 case class Article(
-  id: String,
+  id: UUID,
   title: String,
   text: String,
   createdAt: LocalDateTime,
@@ -14,7 +14,7 @@ case class Article(
 object Article {
   def fromForm(form: ArticleForm): Article =
     Article(
-      id = UUID.randomUUID.toString,
+      id = UUID.randomUUID,
       title = form.title,
       text = form.text,
       createdAt = LocalDateTime.now(),

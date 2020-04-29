@@ -1,5 +1,6 @@
 package controllers
 
+import java.util.UUID
 import javax.inject._
 import play.api.mvc._
 
@@ -8,7 +9,7 @@ class ArticlesController @Inject()(
   val controllerComponents: MessagesControllerComponents
 ) extends MessagesBaseController {
 
-  val store = collection.mutable.Map.empty[String, models.Article]
+  val store = collection.mutable.Map.empty[UUID, models.Article]
 
   def listArticles = Action { implicit request =>
     Ok(views.html.articles.listArticles(store.values))
@@ -31,14 +32,14 @@ class ArticlesController @Inject()(
       })
   }
 
-  def showArticle(id: String) = Action { implicit request =>
+  def showArticle(id: UUID) = Action { implicit request =>
     store.get(id)
       .fold(Redirect(routes.ArticlesController.listArticles)) { article =>
         Ok(views.html.articles.showArticle(article))
       }
   }
 
-  def editArticle(id: String) = Action { implicit request =>
+  def editArticle(id: UUID) = Action { implicit request =>
     store.get(id)
       .fold(Redirect(routes.ArticlesController.listArticles)) { article =>
         val form = models.ArticleForm.fromModel(article)
@@ -47,7 +48,7 @@ class ArticlesController @Inject()(
       }
   }
 
-  def updateArticle(id: String) = Action { implicit request =>
+  def updateArticle(id: UUID) = Action { implicit request =>
     store.get(id)
       .fold(Redirect(routes.ArticlesController.listArticles)) { article =>
         models.ArticleForm.playForm
@@ -62,7 +63,7 @@ class ArticlesController @Inject()(
       }
   }
 
-  def deleteArticle(id: String) = Action {
+  def deleteArticle(id: UUID) = Action {
     store.remove(id)
     Redirect(routes.ArticlesController.listArticles)
   }
