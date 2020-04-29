@@ -11,13 +11,18 @@ class ArticlesController @Inject()(
 
   val store = collection.mutable.Map.empty[UUID, models.Article]
 
-  def listArticles = Action { implicit request =>
-    Ok(views.html.articles.listArticles(store.values))
+  def newArticle = Action { implicit request =>
+    val playform = models.ArticleForm.playForm
+    Ok(views.html.articles.newArticle(playform))
   }
 
-  def newArticle = Action { implicit request =>
-    val form = models.ArticleForm.playForm
-    Ok(views.html.articles.newArticle(form))
+  def editArticle(id: UUID) = Action { implicit request =>
+    store.get(id)
+      .fold(Redirect(routes.ArticlesController.listArticles)) { article =>
+        val form = models.ArticleForm.fromModel(article)
+        val playform = models.ArticleForm.playForm.fill(form)
+        Ok(views.html.articles.editArticle(article.id, playform))
+      }
   }
 
   def createArticle = Action { implicit request =>
@@ -32,19 +37,14 @@ class ArticlesController @Inject()(
       })
   }
 
+  def listArticles = Action { implicit request =>
+    Ok(views.html.articles.listArticles(store.values))
+  }
+
   def showArticle(id: UUID) = Action { implicit request =>
     store.get(id)
       .fold(Redirect(routes.ArticlesController.listArticles)) { article =>
         Ok(views.html.articles.showArticle(article))
-      }
-  }
-
-  def editArticle(id: UUID) = Action { implicit request =>
-    store.get(id)
-      .fold(Redirect(routes.ArticlesController.listArticles)) { article =>
-        val form = models.ArticleForm.fromModel(article)
-        val playform = models.ArticleForm.playForm.fill(form)
-        Ok(views.html.articles.editArticle(article.id, playform))
       }
   }
 
