@@ -21,7 +21,7 @@ class ArticlesController @Inject()(
       .fold(Redirect(routes.ArticlesController.listArticles)) { article =>
         val form = models.ArticleForm.fromModel(article)
         val playform = models.ArticleForm.playForm.fill(form)
-        Ok(views.html.articles.editArticle(article.id, playform))
+        Ok(views.html.articles.editArticle(article, playform))
       }
   }
 
@@ -54,7 +54,7 @@ class ArticlesController @Inject()(
         models.ArticleForm.playForm
           .bindFromRequest
           .fold({ formWithErrors =>
-            BadRequest(views.html.articles.editArticle(id, formWithErrors))
+            BadRequest(views.html.articles.editArticle(article, formWithErrors))
           }, { form =>
             val model = models.Article.updated(article)(form)
             store.update(model.id, model)

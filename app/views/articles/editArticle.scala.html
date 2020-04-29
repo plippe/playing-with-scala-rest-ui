@@ -1,8 +1,8 @@
-@(id: java.util.UUID, form: Form[ArticleForm])(implicit request: MessagesRequestHeader)
+@(article: Article, form: Form[ArticleForm])(implicit request: MessagesRequestHeader)
 
 <h1>Edit Article</h1>
 
-@com.github.plippe.play.form.form(routes.ArticlesController.updateArticle(id)) {
+@com.github.plippe.play.form.form(routes.ArticlesController.updateArticle(article.id)) {
   @helper.CSRF.formField
 
   @helper.inputText(form(models.ArticleForm.TitleField))
@@ -11,5 +11,5 @@
   <input type="submit" />
 }
 
-<a href="@routes.ArticlesController.showArticle(id)">Show</a>
+<a href="@routes.ArticlesController.showArticle(article.id)">Show</a>
 <a href="@routes.ArticlesController.listArticles">Back</a>
