@@ -14,11 +14,11 @@ case class Article(
 object Article {
   def fromForm(form: ArticleForm): Article =
     Article(
-      UUID.randomUUID.toString,
-      form.title,
-      form.text,
-      LocalDateTime.now(),
-      LocalDateTime.now(),
+      id = UUID.randomUUID.toString,
+      title = form.title,
+      text = form.text,
+      createdAt = LocalDateTime.now(),
+      updatedAt = LocalDateTime.now(),
     )
 
   def updated(self: Article)(form: ArticleForm): Article =

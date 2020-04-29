@@ -12,8 +12,8 @@ case class ArticleForm(
 object ArticleForm {
   def fromModel(model: Article): ArticleForm =
     ArticleForm(
-      model.title,
-      model.text,
+      title = model.title,
+      text = model.text,
     )
 
   val TitleField = "title"
