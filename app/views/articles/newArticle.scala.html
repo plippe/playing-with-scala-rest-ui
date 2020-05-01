@@ -1,12 +1,14 @@
-@(form: Form[ArticleForm])(implicit request: MessagesRequestHeader)
+@(articleForm: Form[ArticleForm])(implicit request: MessagesRequestHeader)
+
+@import com.github.plippe.play.form.form
 
 <h1>New Article</h1>
 
-@com.github.plippe.play.form.form(routes.ArticlesController.createArticle) {
+@form(routes.ArticlesController.createArticle) {
   @helper.CSRF.formField
 
-  @helper.inputText(form(models.ArticleForm.TitleField))
-  @helper.textarea(form(models.ArticleForm.TextField))
+  @helper.inputText(articleForm(models.ArticleForm.TitleField))
+  @helper.textarea(articleForm(models.ArticleForm.TextField))
 
   <input type="submit" />
 }

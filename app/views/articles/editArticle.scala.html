@@ -1,19 +1,21 @@
-@(article: Article, form: Form[ArticleForm])(implicit request: MessagesRequestHeader)
+@(article: Article, articleForm: Form[ArticleForm])(implicit request: MessagesRequestHeader)
+
+@import com.github.plippe.play.form.form
 
 <h1>Edit Article</h1>
 
-@com.github.plippe.play.form.form(routes.ArticlesController.updateArticle(article.id)) {
+@form(routes.ArticlesController.updateArticle(article.id)) {
   @helper.CSRF.formField
 
-  @helper.inputText(form(models.ArticleForm.TitleField))
-  @helper.textarea(form(models.ArticleForm.TextField))
+  @helper.inputText(articleForm(models.ArticleForm.TitleField))
+  @helper.textarea(articleForm(models.ArticleForm.TextField))
 
   <input type="submit" />
 }
 
-@com.github.plippe.play.form.form(routes.ArticlesController.deleteArticle(article.id)) {
+@form(routes.ArticlesController.deleteArticle(article.id)) {
   @helper.CSRF.formField
-  <input type="submit" value="Destroy"/>
+  <input type="submit" value="Delete"/>
 }
 
 <a href="@routes.ArticlesController.showArticle(article.id)">Show</a>
